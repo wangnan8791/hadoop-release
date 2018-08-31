@@ -64,6 +64,24 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <enabled>false</enabled>
       </snapshots>
     </repository>
+        
+    <repository>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </repository>
+        
+    <repository>
+      <id>springmaven</id>
+      <name>spring maven</name>
+      <url>http://repo.spring.io/plugins-release</url>
+    </repository>
+        
+    <repository>
+      <id>hortonworks maven</id>
+      <name>hortonworks maven</name>
+      <url>http://nexus-private.hortonworks.com:8081/nexus/content/repositories/IN-QA-SNAPSHOT</url>
+    </repository>
   </repositories>
 
   <licenses>
