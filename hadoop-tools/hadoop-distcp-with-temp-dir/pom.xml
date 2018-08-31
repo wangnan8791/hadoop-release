@@ -170,7 +170,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>org.apache.hadoop.tools.DistCpWithTempDir</mainClass>
+              <mainClass>org.apache.hadoop.tools.DistCp</mainClass>
             </manifest>
           </archive>
         </configuration>

@@ -57,14 +57,14 @@ import com.google.common.annotations.VisibleForTesting;
  */
 @InterfaceAudience.Public
 @InterfaceStability.Evolving
-public class DistCpWithTempDir extends Configured implements Tool {
+public class DistCp extends Configured implements Tool {
 
   /**
    * Priority of the shutdown hook.
    */
   static final int SHUTDOWN_HOOK_PRIORITY = 30;
 
-  static final Log LOG = LogFactory.getLog(DistCpWithTempDir.class);
+  static final Log LOG = LogFactory.getLog(DistCp.class);
 
   private DistCpOptions inputOptions;
   private Path metaFolder;
@@ -84,7 +84,7 @@ public class DistCpWithTempDir extends Configured implements Tool {
    * @param configuration The Hadoop configuration against which the Copy-mapper must run.
    * @throws Exception
    */
-  public DistCpWithTempDir(Configuration configuration, DistCpOptions inputOptions) throws Exception {
+  public DistCp(Configuration configuration, DistCpOptions inputOptions) throws Exception {
     Configuration config = new Configuration(configuration);
     config.addResource(DISTCP_DEFAULT_XML);
     setConf(config);
@@ -96,7 +96,7 @@ public class DistCpWithTempDir extends Configured implements Tool {
    * To be used with the ToolRunner. Not for public consumption.
    */
   @VisibleForTesting
-  DistCpWithTempDir() {}
+  DistCp() {}
 
   /**
    * Implementation of Tool::run(). Orchestrates the copy of source file(s)
@@ -458,7 +458,7 @@ public class DistCpWithTempDir extends Configured implements Tool {
   public static void main(String argv[]) {
     int exitCode;
     try {
-      DistCpWithTempDir distCp = new DistCpWithTempDir();
+      DistCp distCp = new DistCp();
       Cleanup CLEANUP = new Cleanup(distCp);
 
       ShutdownHookManager.get().addShutdownHook(CLEANUP,
@@ -499,9 +499,9 @@ public class DistCpWithTempDir extends Configured implements Tool {
   }
 
   private static class Cleanup implements Runnable {
-    private final DistCpWithTempDir distCp;
+    private final DistCp distCp;
 
-    Cleanup(DistCpWithTempDir distCp) {
+    Cleanup(DistCp distCp) {
       this.distCp = distCp;
     }
 

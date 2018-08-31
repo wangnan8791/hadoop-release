@@ -48,7 +48,7 @@ import com.google.common.collect.Sets;
 public abstract class CopyListing extends Configured {
 
   private Credentials credentials;
-  static final Log LOG = LogFactory.getLog(DistCpWithTempDir.class);
+  static final Log LOG = LogFactory.getLog(DistCp.class);
   /**
    * Build listing function creates the input listing that distcp uses to
    * perform the copy.

@@ -145,7 +145,7 @@ class DistCpSync {
       }
       return true;
     } catch (Exception e) {
-      DistCpWithTempDir.LOG.warn("Failed to use snapshot diff for distcp", e);
+      DistCp.LOG.warn("Failed to use snapshot diff for distcp", e);
       return false;
     } finally {
       deleteTargetTmpDir(targetFs, tmpDir);
@@ -203,7 +203,7 @@ class DistCpSync {
       }
       return true;
     } catch (IOException e) {
-      DistCpWithTempDir.LOG.warn("Failed to compute snapshot diff on " + sourceDir, e);
+      DistCp.LOG.warn("Failed to compute snapshot diff on " + sourceDir, e);
     }
     this.diffMap = null;
     return false;
@@ -225,7 +225,7 @@ class DistCpSync {
   private Path createTargetTmpDir(DistributedFileSystem targetFs,
                                   Path targetDir) throws IOException {
     final Path tmp = new Path(targetDir,
-        DistCpConstants.HDFS_DISTCP_DIFF_DIRECTORY_NAME + DistCpWithTempDir.rand.nextInt());
+        DistCpConstants.HDFS_DISTCP_DIFF_DIRECTORY_NAME + DistCp.rand.nextInt());
     if (!targetFs.mkdirs(tmp)) {
       throw new IOException("The tmp directory " + tmp + " already exists");
     }
@@ -239,7 +239,7 @@ class DistCpSync {
         targetFs.delete(tmpDir, true);
       }
     } catch (IOException e) {
-      DistCpWithTempDir.LOG.error("Unable to cleanup tmp dir: " + tmpDir, e);
+      DistCp.LOG.error("Unable to cleanup tmp dir: " + tmpDir, e);
     }
   }
 
@@ -252,14 +252,14 @@ class DistCpSync {
       SnapshotDiffReport targetDiff =
           fs.getSnapshotDiffReport(path, inputOptions.getFromSnapshot(), "");
       if (!targetDiff.getDiffList().isEmpty()) {
-        DistCpWithTempDir.LOG.warn("The target has been modified since snapshot "
+        DistCp.LOG.warn("The target has been modified since snapshot "
             + inputOptions.getFromSnapshot());
         return false;
       } else {
         return true;
       }
     } catch (IOException e) {
-      DistCpWithTempDir.LOG.warn("Failed to compute snapshot diff on " + path, e);
+      DistCp.LOG.warn("Failed to compute snapshot diff on " + path, e);
     }
     return false;
   }
